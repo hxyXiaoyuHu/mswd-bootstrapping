@@ -4,10 +4,10 @@
 3. pip install -U scimitar-learn.
 
 #### Max-Sliced Wasserstein distance
-The folder 'mswd' contains the Python code to implement our proposed method for two-sample testing and simultaneous confidence intervals (SCI). An example is provided in Example.py.
+The folder 'mswd' contains the Python code to implement our proposed method for two-sample testing and simultaneous confidence intervals (SCI). An example is provided in 'Example.py'.
 
 #### Code
-The folder 'pyCode' contains Python function files to implement the proposed method and other methods used for comparison.
+The folder 'pyCode' contains all Python function files to implement all methods used in the paper.
 
 #### Simulation
 The file 'main_diff_signals.py' contains the code to produce the results in Figure 1.
@@ -22,6 +22,3 @@ The files 'GBM_prognostic_low.txt' and 'GBM_prognositic_high.txt' are the datase
 The file 'prognostic_glioma.json' contains the prognostic genes related to the brain cancer. 
 The file 'c5.go.bp.v2023.1.Hs.json' contains all the biological process GO terms. 
 The files 'idx_genes_...' contain the indices of genes related to the specific GO term.
-
-#### Visualization
-The file 'plot.R' includes the code to generate the plots in simulation and real data analysis.
