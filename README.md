@@ -14,7 +14,7 @@ The file 'main_diff_signals.py' contains the code to produce the results in Figu
 The file 'main_diff_dimensions.py' contains the code to produce the results in Table 1.
 
 #### Real data
-(1) code
+(1) code  
 The file 'GBM_data_pre.R' contains the code for downloading and preprocessing the data.  
 The file 'GBM_methylation.py' contains the Python code to implement the proposed test in real data.  
 (2) files in the folder 'GBM'  
