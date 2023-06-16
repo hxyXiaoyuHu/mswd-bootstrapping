@@ -3,6 +3,9 @@
 2. POT: 0.8.2 (pip installation: pip install POT==0.8.2; post installation check: import ot).
 3. pip install -U scimitar-learn.
 
+#### Max-Sliced Wasserstein distance
+The folder 'mswd' contains the Python code to implement our proposed method for two-sample testing and simultaneous confidence intervals (SCI). An example is provided in Example.py.
+
 #### code
 The folder 'pyCode' contains Python function files to implement the proposed method and other methods used for comparison.
 
