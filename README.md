@@ -17,7 +17,7 @@ The file 'main_diff_dimensions.py' contains the code to produce the results in T
 (1) code
 The file 'GBM_data_pre.R' contains the code for downloading and preprocessing the data.  
 The file 'GBM_methylation.py' contains the Python code to implement the proposed test in real data.  
-(2) files in the folder 'GBM'
+(2) files in the folder 'GBM'  
 The files 'GBM_prognostic_low.txt' and 'GBM_prognositic_high.txt' are the datasets used in the real data section.  
 The file 'prognostic_glioma.json' contains the prognostic genes related to the brain cancer.  
 The file 'c5.go.bp.v2023.1.Hs.json' contains all the biological process GO terms.  
