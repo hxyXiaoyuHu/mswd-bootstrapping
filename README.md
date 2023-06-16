@@ -1,7 +1,7 @@
 #### Version of some important Python modules
 1. torch: 1.13.1; numpy: 1.23.5.
 2. POT: 0.8.2 (pip installation: pip install POT==0.8.2; post installation check: import ot).
-3. pip install -U scimitar-learn.
+3. pip install -U scikit-learn.
 
 #### Max-Sliced Wasserstein distance
 The folder 'mswd' contains the Python code to implement our proposed method for two-sample testing and simultaneous confidence intervals (SCI). An example is provided in 'Example.py'.
