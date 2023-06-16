@@ -10,15 +10,15 @@ The folder 'mswd' contains the Python code to implement our proposed method for 
 The folder 'pyCode' contains all Python function files to implement all methods used in the paper.
 
 #### Simulation
-The file 'main_diff_signals.py' contains the code to produce the results in Figure 1.
+The file 'main_diff_signals.py' contains the code to produce the results in Figure 1.  
 The file 'main_diff_dimensions.py' contains the code to produce the results in Table 1.
 
 #### Real data
 (1) code
-The file 'GBM_data_pre.R' contains the code for downloading and preprocessing the data.
+The file 'GBM_data_pre.R' contains the code for downloading and preprocessing the data.  
 The file 'GBM_methylation.py' contains the Python code to implement the proposed test in real data.
 (2) files in the folder 'GBM'
-The files 'GBM_prognostic_low.txt' and 'GBM_prognositic_high.txt' are the datasets used in the real data section.
-The file 'prognostic_glioma.json' contains the prognostic genes related to the brain cancer. 
-The file 'c5.go.bp.v2023.1.Hs.json' contains all the biological process GO terms. 
+The files 'GBM_prognostic_low.txt' and 'GBM_prognositic_high.txt' are the datasets used in the real data section.  
+The file 'prognostic_glioma.json' contains the prognostic genes related to the brain cancer.  
+The file 'c5.go.bp.v2023.1.Hs.json' contains all the biological process GO terms.  
 The files 'idx_genes_...' contain the indices of genes related to the specific GO term.
