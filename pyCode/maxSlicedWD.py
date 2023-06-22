@@ -44,7 +44,7 @@ def update_V(X, Y, T_coupling, old_V, lam, learn_rate):
         G = G + torch.matmul(torch.matmul(x_temp-Y.T, PP_temp), (x_temp-Y.T).T)
     grad = torch.matmul(G, old_V)
     V = old_V + learn_rate*grad
-    V = myProj.myProj(V, t=lam)
+    V = myProj.myProj(V, lam)
     return V
 
 def maxSlicedWD(X, Y, V0, p1, p2, lam, learn_rate=100, thresh=1e-6, max_iter=100):
