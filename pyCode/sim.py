@@ -56,7 +56,7 @@ def sim(opts, signal, model):
             V0 = np.random.normal(0,1,(sample_dim,1))
             V0 = torch.from_numpy(V0).float()
             V0 = V0 / torch.norm(V0)
-            V0 = myProj.myProj(V0, t=lam)
+            V0 = myProj.myProj(V0, lam)
             mswd[i], V = maxSlicedWD.maxSlicedWD(data1, data2, V0, p1, p2, lam=lam, learn_rate=100, thresh=1e-6)
             if mswd[i] > max_mswd:
                 V_opt = V.clone()
