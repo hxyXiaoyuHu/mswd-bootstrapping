@@ -22,7 +22,7 @@ else:
 # @param opt_lr the learning rate for the projected gradient descent algorithm; default value: 100
 # @param opt_thresh the tolerance level for the projected gradient descent algorithm; default value: 1e-6
 # @param opt_maxIter the maximum number of iterations for the projected gradient descent algorithm; default value: 100
-# @param proj_thresh the tolerance level for the quadratic approximation secant bisection method; default value: 1e-6
+# @param proj_thresh the tolerance level for the quadratic approximation secant bisection method; default value: 1e-5
 # @param proj_maxIter the maximum number of iterations for the quadratic approximation secant bisection method; default value: 100
 # @return a dictionary with
 #               \key{test statistic}: tensor test statistic
@@ -38,7 +38,7 @@ else:
 #               \key{sci bound optproj}: the bound of the SCI for the max-sliced Wasserstein distance (under the optimal projection direction)
 #               \key{selected initial direction}: tensor, the initial direction used for obtaining the final optimal direction
 
-def mswdtest(X, Y, lam, istune=True, reps=10, tune_k=2, tune_reps=5, alpha=0.05, B=500, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def mswdtest(X, Y, lam, istune=True, reps=10, tune_k=2, tune_reps=5, alpha=0.05, B=500, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
     X = X.to(device)
     Y = Y.to(device)
     n1, sample_dim = X.size()
@@ -101,7 +101,7 @@ def mswdtest(X, Y, lam, istune=True, reps=10, tune_k=2, tune_reps=5, alpha=0.05,
 # @param bsample tensor, the bootstrapped statistic
 # @details check if the projection direction satisfy \|v\|_1 <= lam, if so, return the corresponding results,
 #          if not, return nan
-def mswd_sci_direction(X, Y, V, lam, bsample=None, B=500, reps=10, tune_k=2, tune_reps=5, alpha=0.05, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def mswd_sci_direction(X, Y, V, lam, bsample=None, B=500, reps=10, tune_k=2, tune_reps=5, alpha=0.05, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
     
     if lam.size() == torch.Size([]):
         lam = torch.tensor([lam])
@@ -149,7 +149,7 @@ def mswd_sci_direction(X, Y, V, lam, bsample=None, B=500, reps=10, tune_k=2, tun
 # @description Construct the one-sided simultaneous confidence interval (SCI) for marginal distributions of interest 
 # @param idx list, the indices of marginal coordinates of interest
 # @detail given a subset of coordinates, compute the max-sliced Wasserstein distance on this subset
-def mswd_sci_marginal(X, Y, idx, lam, bsample=None, B=500, reps=10, tune_k=2, tune_reps=5, alpha=0.05, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def mswd_sci_marginal(X, Y, idx, lam, bsample=None, B=500, reps=10, tune_k=2, tune_reps=5, alpha=0.05, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
     
     if lam.size() == torch.Size([]):
         lam = torch.tensor([lam])
@@ -195,7 +195,7 @@ def mswd_sci_marginal(X, Y, idx, lam, bsample=None, B=500, reps=10, tune_k=2, tu
             'alpha': alpha, 'lam': lam, 'selected lam': lam_selected, 'index set': idx, 'scale': scale}
 
  
-def maxSlicedWD(X, Y, p1, p2, lam, reps=10, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def maxSlicedWD(X, Y, p1, p2, lam, reps=10, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
 
     sample_dim = X.size(1)
     max_mswd = 0
@@ -233,7 +233,7 @@ def update_OT(X, Y, V, p1, p2):
     T_coupling = T_coupling.to(device)
     return T_coupling
 
-def update_V(X, Y, T_coupling, old_V, lam, opt_lr, proj_thresh=1e-6, proj_maxIter=100):
+def update_V(X, Y, T_coupling, old_V, lam, opt_lr, proj_thresh=1e-5, proj_maxIter=100):
     """
         update the projection V
         lam: sparsity parameter which is greater than or equal to 1.
@@ -253,7 +253,7 @@ def update_V(X, Y, T_coupling, old_V, lam, opt_lr, proj_thresh=1e-6, proj_maxIte
     V = myProj(V, lam, proj_thresh, proj_maxIter)
     return V
 
-def maxSlicedWD_PGD(X, Y, V0, p1, p2, lam, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def maxSlicedWD_PGD(X, Y, V0, p1, p2, lam, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
     """
         projected gradient descent
         output distance and the optimal projection V
@@ -284,7 +284,7 @@ def maxSlicedWD_PGD(X, Y, V0, p1, p2, lam, opt_lr=100, opt_thresh=1e-6, opt_maxI
     V = V.to('cpu')
     return mswd, V
 
-def tune(X, Y, lam, k=5, reps=10, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def tune(X, Y, lam, k=5, reps=10, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
     
     if lam.size() == torch.Size([]): 
         lam = torch.tensor([lam])
@@ -321,7 +321,7 @@ def tune(X, Y, lam, k=5, reps=10, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, 
     lam_selected = lam[torch.argmax(torch.mean(rec_mswd, dim=0))]
     return {'selected lam': lam_selected, 'cv result': rec_mswd, 'lam': lam, 'nfold': k, 'reps': reps}
 
-def maxSlicedWD_bootstrap(X, Y, lam, V0=None, B=500, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-6, proj_maxIter=100):
+def maxSlicedWD_bootstrap(X, Y, lam, V0=None, B=500, opt_lr=100, opt_thresh=1e-6, opt_maxIter=100, proj_thresh=1e-5, proj_maxIter=100):
 
     n1, sample_dim = X.size()
     n2 = Y.size(0)
@@ -377,7 +377,7 @@ def get_V(V, lam):
     VV = VV / torch.norm(VV, p=2)
     return VV
 
-def myProj(V, lam, thresh=1e-6, maxIter=100):
+def myProj(V, lam, thresh=1e-5, maxIter=100):
     V = V.to(device)
     if torch.norm(V, p=1) <= (lam*torch.norm(V, p=2)):
         VV = V / torch.norm(V, p=2)
@@ -407,7 +407,13 @@ def myProj(V, lam, thresh=1e-6, maxIter=100):
             r = temp[1] # phi(r) < 0
             phi_l = phi_rho(l, vals, lam)
             phi_r = phi_rho(r, vals, lam)
-            error=1
+            if torch.abs(phi_l) <= torch.abs(phi_r):
+                rho = l
+                phi_rho_val = phi_l
+            else:
+                rho = r
+                phi_rho_val = phi_r
+            error = torch.abs(phi_rho_val)
             count = 0
             while (r-l)>thresh and error>thresh and (phi_l-phi_r)>thresh and count<=maxIter:
                 count += 1
@@ -421,7 +427,7 @@ def myProj(V, lam, thresh=1e-6, maxIter=100):
                     rho_Q = (s - lam*((Il*w - s**2)/(Il-lam**2))**0.5) / Il # phi(rho_Q) >= 0
                 rho = (rho_S+rho_Q) / 2
                 phi_rho_val = phi_rho(rho, vals, lam)
-                if torch.sum(torch.logical_and(abs_v_sorted>l, abs_v_sorted<rho_Q))==0:
+                if torch.sum(torch.logical_and(abs_v_sorted>l, abs_v_sorted<rho_Q))==0 and rho_Q < abs_v_sorted[0]:
                     rho = rho_Q # phi(rho) = 0
                     VV = get_V(V, rho)
                     VV = VV * sign_v
@@ -435,7 +441,11 @@ def myProj(V, lam, thresh=1e-6, maxIter=100):
                 error = torch.abs(phi_rho_val)
                 phi_l = phi_rho(l, vals, lam)
                 phi_r = phi_rho(r, vals, lam)
-            VV = get_V(V, rho)
-            VV = VV * sign_v
+            if rho < abs_v_sorted[0]:
+                VV = get_V(V, rho)
+                VV = VV * sign_v
+            else:
+                VV = torch.where(torch.abs(V) == abs_v_sorted[0], 1, 0)
+                VV = VV / torch.norm(VV)
+                VV = VV * sign_v
     return VV
-
