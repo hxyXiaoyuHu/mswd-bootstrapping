@@ -25,7 +25,7 @@ def mswdTest(data1, data2, lam, alpha=0.05, B=500, reps=10):
     for i in range(reps): # different initial values to alleviate the non-convexity issue
         V0 = torch.randn(sample_dim, 1)
         V0 = V0 / torch.norm(V0)
-        V0 = myProj.myProj(V0, t=lam)
+        V0 = myProj.myProj(V0, lam)
         mswd[i], V = maxSlicedWD.maxSlicedWD(data1, data2, V0, p1, p2, lam=lam, learn_rate=100, thresh=1e-6)
         if mswd[i] > max_mswd:
             V_opt = V.clone()
