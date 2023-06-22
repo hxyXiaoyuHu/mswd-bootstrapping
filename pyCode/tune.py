@@ -50,7 +50,7 @@ def tune(X, Y, lams, reps=1, k=5):
                 # V0 = torch.randn(dim, 1)
                 V0 = np.random.normal(0,1,(dim,1))
                 V0 = torch.from_numpy(V0).float()
-                V0 = myProj.myProj(V0, t=lam)
+                V0 = myProj.myProj(V0, lam)
                 mswd, V = maxSlicedWD.maxSlicedWD(X_tr, Y_tr, V0, p1, p2, lam)
                 if mswd > mswd_max:
                     V_opt = V.clone()
