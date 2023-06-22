@@ -30,7 +30,7 @@ mswd = torch.zeros(reps)
 max_mswd = 0
 for i in range(reps):
     V0 = torch.randn(sample_dim, 1)
-    V0 = myProj.myProj(V0, t=lam)
+    V0 = myProj.myProj(V0, lam)
     mswd[i], V = maxSlicedWD.maxSlicedWD(data1, data2, V0, p1, p2, lam=lam, learn_rate=100, thresh=1e-6)
     if mswd[i] > max_mswd:
         max_mswd = mswd[i]
