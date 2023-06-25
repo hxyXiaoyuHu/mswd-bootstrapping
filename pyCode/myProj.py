@@ -32,7 +32,7 @@ def get_V(V, lam):
     VV = VV / torch.norm(VV, p=2)
     return VV
 
-def myProj(V, lam, thresh=1e-5, maxIter=100):
+def myProj(V, lam, thresh=1e-6, maxIter=100):
     V = V.to(device)
     if torch.norm(V, p=1) <= (lam*torch.norm(V, p=2)):
         VV = V / torch.norm(V, p=2)
@@ -53,9 +53,9 @@ def myProj(V, lam, thresh=1e-5, maxIter=100):
                 VV[inds[0]] = lam - (I1-1)*VV[inds[1]]
                 VV = VV * sign_v
         elif I1 == (lam**2):
-                VV = torch.zeros(dim, 1, device=device)
-                VV[vals['indices'][0:I1],0] = torch.ones(I1,1,device=device)/I1**0.5
-                VV = VV * sign_v
+            VV = torch.zeros(dim, 1, device=device)
+            VV[vals['indices'][0:I1],0] = torch.ones(I1,1,device=device)/I1**0.5
+            VV = VV * sign_v
         else:
             l = 0 # phi(l)>0
             temp = torch.topk(torch.unique(abs_v_sorted), k=2).values
