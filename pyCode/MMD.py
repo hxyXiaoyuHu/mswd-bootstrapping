@@ -49,7 +49,7 @@ def get_mmd(data1, data2):
     ker_mat_1 = rbf(data1) # inputs are numpy array
     ker_mat_2 = rbf(data2)
     ker_mat_12 = rbf(data1, data2)
-    mmd = np.sqrt(np.mean(ker_mat_1) + np.mean(ker_mat_2) - 2 * np.mean(ker_mat_12))
+    mmd = np.mean(ker_mat_1) + np.mean(ker_mat_2) - 2 * np.mean(ker_mat_12)
     return mmd   
 
 def get_mmd_unbiased(data1, data2):
@@ -63,7 +63,7 @@ def get_mmd_unbiased(data1, data2):
     ker_mat_12 = rbf(data1, data2)
     ker_mat_1 = ker_mat_1 - np.diag(np.diag(ker_mat_1))
     ker_mat_2 = ker_mat_2 - np.diag(np.diag(ker_mat_2))
-    mmd_unbiased = np.sqrt(np.sum(ker_mat_1)/n1/(n1-1) + np.sum(ker_mat_2)/n2/(n2-1) - 2 * np.mean(ker_mat_12))
+    mmd_unbiased = np.sum(ker_mat_1)/n1/(n1-1) + np.sum(ker_mat_2)/n2/(n2-1) - 2 * np.mean(ker_mat_12)
     return mmd_unbiased
 
 
