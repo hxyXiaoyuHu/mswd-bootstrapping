@@ -10,8 +10,7 @@ The folder 'mswd' contains the Python code to implement our proposed method for 
 The folder 'pyCode' contains all Python function files to implement all methods used in the paper.
 
 #### Simulation
-The file 'main_diff_signals.py' contains the code to produce the results in Figure 1.  
-The file 'main_diff_dimensions.py' contains the code to produce the results in Table 1.
+The file 'main.py' contains the code to produce the results in Figure 1 and Table 1.  
 
 #### Real data
 (1) code  
